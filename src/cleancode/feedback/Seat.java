@@ -1,4 +1,4 @@
-package cleancode.Lv5;
+package cleancode.feedback;
 
 public class Seat {
 
@@ -18,7 +18,11 @@ public class Seat {
     return status;
   }
 
-  public void book() {
+  public void book(SeatStatus status, String seatNum) {
+    if (status == SeatStatus.BOOKED) {
+      throw new IllegalStateException("Seat " + seatNum + " is already booked.");
+    }
+
     this.status = SeatStatus.BOOKED;
   }
 }

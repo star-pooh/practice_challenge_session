@@ -1,4 +1,4 @@
-package cleancode.Lv3;
+package cleancode.lv4;
 
 public class Seat {
 

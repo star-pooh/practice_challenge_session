@@ -1,4 +1,4 @@
-package cleancode.Lv5;
+package cleancode.lv5;
 
 public enum SeatStatus {
   AVAILABLE,

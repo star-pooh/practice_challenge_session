@@ -1,18 +1,17 @@
-package cleancode.Lv1;
+package cleancode.lv2;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class DirtyCode {
+public class Main {
 
   public static void main(String[] args) {
     // 실제 좌석 정보
-    List<String> seatInfoList = new ArrayList<>();
-    seatInfoList.add("A1:AVAILABLE");
-    seatInfoList.add("A2:AVAILABLE");
-    seatInfoList.add("A3:AVAILABLE");
+    List<Seat> seatInfoList = List.of(
+        new Seat("A1", "AVAILABLE"),
+        new Seat("A2", "AVAILABLE"),
+        new Seat("A3", "AVAILABLE"));
 
-    // 예약하려는 좌석 정보
+    // 예약 하려는 좌석 정보
     List<String> seatBookList = List.of("A2", "A3", "A1", "A4");
 
     for (String seatNum : seatBookList) {
@@ -27,20 +26,18 @@ public class DirtyCode {
    * @param seatInfoList 실제 좌석 정보
    * @param seatNum      예약하려는 좌석 번호
    */
-  private static void bookSeat(List<String> seatInfoList, String seatNum) {
+  private static void bookSeat(List<Seat> seatInfoList, String seatNum) {
     boolean isExistSeat = false;
 
-    for (int i = 0; i < seatInfoList.size(); i++) {
-      String seatInfo = seatInfoList.get(i);
-
-      if (!seatInfo.startsWith(seatNum)) {
+    for (Seat seat : seatInfoList) {
+      if (!seat.getSeatNumber().equals(seatNum)) {
         continue;
       }
 
-      if (seatInfo.endsWith("BOOKED")) {
+      if (seat.getStatus().equals("BOOKED")) {
         System.out.println("Seat " + seatNum + " is already booked.");
       } else {
-        seatInfoList.set(i, seatNum + ":BOOKED");
+        seat.setStatus("BOOKED");
         System.out.println("Seat " + seatNum + " has been successfully booked.");
       }
       isExistSeat = true;
@@ -52,17 +49,12 @@ public class DirtyCode {
   }
 
   /**
-   * 예약된 좌석 수 확인
+   * 예약된 좌석의 수 계산
    *
    * @param seatInfoList 실제 좌석 정보
    */
-  private static void countBookedSeats(List<String> seatInfoList) {
-    int count = 0;
-    for (String seatInfo : seatInfoList) {
-      if (seatInfo.endsWith("BOOKED")) {
-        count++;
-      }
-    }
+  private static void countBookedSeats(List<Seat> seatInfoList) {
+    int count = (int) seatInfoList.stream().filter(i -> i.getStatus().equals("BOOKED")).count();
     System.out.println("Total booked seats: " + count);
   }
 }

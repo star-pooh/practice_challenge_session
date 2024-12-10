@@ -1,11 +1,11 @@
-package cleancode.Lv2;
+package cleancode.lv5;
 
 public class Seat {
 
   private final String seatNumber;
-  private String status;
+  private SeatStatus status;
 
-  public Seat(String seatNumber, String status) {
+  public Seat(String seatNumber, SeatStatus status) {
     this.seatNumber = seatNumber;
     this.status = status;
   }
@@ -14,11 +14,11 @@ public class Seat {
     return seatNumber;
   }
 
-  public String getStatus() {
+  public SeatStatus getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
-    this.status = status;
+  public void book() {
+    this.status = SeatStatus.BOOKED;
   }
 }

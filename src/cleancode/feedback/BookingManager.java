@@ -1,6 +1,7 @@
-package cleancode.Lv5;
+package cleancode.feedback;
 
 import java.util.List;
+import java.util.Objects;
 
 public class BookingManager {
 
@@ -14,16 +15,18 @@ public class BookingManager {
     boolean isExistSeat = false;
 
     for (Seat seat : seatInfoList) {
+      if (Objects.isNull(seat)) {
+        System.out.println("Incorrect seat information");
+        continue;
+      }
+
       if (!seat.getSeatNumber().equals(seatNum)) {
         continue;
       }
 
-      if (seat.getStatus() == SeatStatus.BOOKED) {
-        throw new IllegalStateException("Seat " + seatNum + " is already booked.");
-      } else {
-        seat.book();
-        System.out.println("Seat " + seatNum + " has been successfully booked.");
-      }
+      seat.book(seat.getStatus(), seatNum);
+      System.out.println("Seat " + seatNum + " has been successfully booked.");
+
       isExistSeat = true;
     }
 

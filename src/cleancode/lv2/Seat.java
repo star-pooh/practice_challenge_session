@@ -1,4 +1,4 @@
-package cleancode.Lv4;
+package cleancode.lv2;
 
 public class Seat {
 
@@ -18,7 +18,7 @@ public class Seat {
     return status;
   }
 
-  public void book() {
-    this.status = "BOOKED";
+  public void setStatus(String status) {
+    this.status = status;
   }
 }

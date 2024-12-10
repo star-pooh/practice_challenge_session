@@ -1,4 +1,4 @@
-package cleancode.Lv4;
+package cleancode.lv5;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class BookingManager {
         continue;
       }
 
-      if (seat.getStatus().equals("BOOKED")) {
+      if (seat.getStatus() == SeatStatus.BOOKED) {
         throw new IllegalStateException("Seat " + seatNum + " is already booked.");
       } else {
         seat.book();
@@ -38,7 +38,7 @@ public class BookingManager {
    * @param seatInfoList 실제 좌석 정보
    */
   public void countBookedSeats(List<Seat> seatInfoList) {
-    int count = (int) seatInfoList.stream().filter(i -> i.getStatus().equals("BOOKED")).count();
+    int count = (int) seatInfoList.stream().filter(i -> i.getStatus() == SeatStatus.BOOKED).count();
     System.out.println("Total booked seats: " + count);
   }
 }
